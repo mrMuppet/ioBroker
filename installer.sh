@@ -373,7 +373,7 @@ case "$HOST_PLATFORM" in
 	"freebsd")
 		declare -a packages=(
 			"sudo"
-			"python2.7" # Required for node-gyp compilation
+			"python27" # Required for node-gyp compilation
 			"git"
 			"curl"
 			"bash"
