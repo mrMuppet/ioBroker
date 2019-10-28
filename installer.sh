@@ -741,7 +741,7 @@ elif [ "$INITSYSTEM" = "rc.d" ]; then
 		load_rc_config \$name
 
 		iobroker_enable=\${iobroker_enable-"NO"}
-		iobroker_pidfile=\${iobroker_pidfile-"$CONTROLLER_DIR/lib/iobroker.pid"}
+		iobroker_pidfile=\${iobroker_pidfile-"/var/run/iobroker.pid"}
 
 		PIDF=$CONTROLLER_DIR/lib/iobroker.pid
 
