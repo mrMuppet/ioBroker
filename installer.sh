@@ -373,6 +373,7 @@ case "$HOST_PLATFORM" in
 	"freebsd")
 		declare -a packages=(
 			"sudo"
+			"python2.7" # Required for node-gyp compilation
 			"git"
 			"curl"
 			"bash"
@@ -381,7 +382,9 @@ case "$HOST_PLATFORM" in
 			"dbus"
 			"nss_mdns" # needed for the mdns host resolution 
 			"gcc"
-			"python" # Required for node-gyp compilation
+			"npm-node10"
+			"www/npm-node10"
+			
 		)
 		for pkg in "${packages[@]}"; do
 			install_package_freebsd $pkg
@@ -744,12 +747,14 @@ elif [ "$INITSYSTEM" = "rc.d" ]; then
 
 		iobroker_start ()
 		{
-			su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js start"
+			#su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js start"
+			iobroker start
 		}
 
 		iobroker_stop ()
 		{
-			su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js stop"
+			#su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js stop"
+			iobroker stop
 		}
 
 		iobroker_status ()
