@@ -299,7 +299,6 @@ install_package_freebsd() {
 		fi
 		echo "Installed $package"
 	fi
-	npm config set python /usr/local/bin/python2.7
 }
 
 install_package_macos() {
@@ -402,6 +401,8 @@ case "$HOST_PLATFORM" in
 		# enable services avahi/dbus
 		sysrc -f /etc/rc.conf dbus_enable="YES"
 		sysrc -f /etc/rc.conf avahi_daemon_enable="YES"
+		
+		npm config set python /usr/local/bin/python2.7
 		
 		# start services
 		service dbus start
