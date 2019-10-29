@@ -637,6 +637,9 @@ install_necessary_packages() {
 		# enable services avahi/dbus
 		sysrc -f /etc/rc.conf dbus_enable="YES"
 		sysrc -f /etc/rc.conf avahi_daemon_enable="YES"
+		
+		# change Link from python3 to python2.7 (needed for gyp)
+		npm config set python /usr/local/bin/python2.7
 
 		# start services
 		service dbus start
@@ -941,13 +944,15 @@ elif [ "$INITSYSTEM" = "rc.d" ]; then
 
 		iobroker_start ()
 		{
-			su -m $IOB_USER -s "$BASH_CMDLINE" -c "\${NODECMD} ${CONTROLLER_DIR}/iobroker.js start"
+#			su -m $IOB_USER -s "$BASH_CMDLINE" -c "\${NODECMD} ${CONTROLLER_DIR}/iobroker.js start"
+			iobroker start
 		}
 
 		iobroker_stop ()
 		{
-			su -m $IOB_USER -s "$BASH_CMDLINE" -c "\${NODECMD} ${CONTROLLER_DIR}/iobroker.js stop"
-		}
+#			su -m $IOB_USER -s "$BASH_CMDLINE" -c "\${NODECMD} ${CONTROLLER_DIR}/iobroker.js stop"
+			iobroker stop
+}
 
 		iobroker_status ()
 		{
