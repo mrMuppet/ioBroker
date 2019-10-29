@@ -637,7 +637,10 @@ install_necessary_packages() {
 		# enable services avahi/dbus
 		sysrc -f /etc/rc.conf dbus_enable="YES"
 		sysrc -f /etc/rc.conf avahi_daemon_enable="YES"
-
+		
+		# change used python-version from python3 to python2.7 (needed for gyp)
+		npm config set python /usr/local/bin/python2.7
+		
 		# start services
 		service dbus start
 		service avahi-daemon start
