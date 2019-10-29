@@ -739,7 +739,7 @@ elif [ "$INITSYSTEM" = "rc.d" ]; then
 		. /etc/rc.subr
 
 		name="iobroker"
-		rcvar="iobroker_enable"
+		rcvar=iobroker_enable
 
 		load_rc_config \$name
 
@@ -749,29 +749,35 @@ elif [ "$INITSYSTEM" = "rc.d" ]; then
 
 		PIDF=$CONTROLLER_DIR/lib/iobroker.pid
 
-		iobroker_start ()
+		iobroker_prestart()
+		{
+    			mkdir -p /var/run/iobroker
+		}
+
+		iobroker_start()
 		{
 			#su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js start"
 			iobroker start
 		}
 
-		iobroker_stop ()
+		iobroker_stop()
 		{
 			#su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js stop"
 			iobroker stop
 		}
 
-		iobroker_status ()
+		iobroker_status()
 		{
 			su -m "$IOB_USER" -s "$BASH_CMDLINE" -c "${NODECMD} ${CONTROLLER_DIR}/iobroker.js status"
 		}
 
 		PATH="\${PATH}:/usr/local/bin"
-		pidfile="\${iobroker_pidfile}"
+		pidfile="/var/run/iobroker/pid"
 
-		start_cmd=iobroker_start
-		stop_cmd=iobroker_stop
-		status_cmd=iobroker_status
+		start_precmd="iobroker_prestart"
+		start_cmd="iobroker_start"
+		stop_cmd="iobroker_stop"
+		status_cmd="iobroker_status"
 
 		run_rc_command "\$1"
 		EOF
