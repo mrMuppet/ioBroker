@@ -388,6 +388,7 @@ case "$HOST_PLATFORM" in
 		)
 		for pkg in "${packages[@]}"; do
 			install_package_freebsd $pkg
+			
 		done
 		# we need to do some settting up things after installing the packages
 		# ensure dns_sd.h is where node-gyp expect it 
