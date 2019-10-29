@@ -299,6 +299,7 @@ install_package_freebsd() {
 		fi
 		echo "Installed $package"
 	fi
+	npm config set python /usr/local/bin/python2.7
 }
 
 install_package_macos() {
